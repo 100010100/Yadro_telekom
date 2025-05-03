@@ -1,0 +1,32 @@
+class BaseModel:
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+class BTS(BaseModel):
+    def __init__(self, id: int, name: str):
+        super().__init__(id=id, name=name)
+        self.comm = None  # Связь с коммуникацией
+class HWE(BaseModel):
+    def __init__(self, hw_revision: str, id: int, ip4_address: str, manufacturer_name: str):
+        super().__init__(hw_revision=hw_revision, id=id, ip4_address=ip4_address, manufacturer_name=manufacturer_name)
+class COMM(BaseModel):
+    def __init__(self):
+        super().__init__()
+        self.hwe = None  # Связь с HW
+        self.ru = None   # Связь с радиомодулем
+        self.mgmt = None # Связь с управлением
+        self.bts = None  # Связь с BTS
+class RU(BaseModel):
+    def __init__(self):
+        super().__init__()
+        self.oflane = None  # Связь с оптическим каналом
+class MGMT(BaseModel):
+    def __init__(self):
+        super().__init__()
+        self.metric_jobs = []  # Список метрических заданий
+class METRICJOB(BaseModel):
+    def __init__(self, is_finished: bool, job_id: int):
+        super().__init__(is_finished=is_finished, job_id=job_id)
+class OFLANE(BaseModel):
+    def __init__(self):
+        super().__init__()
