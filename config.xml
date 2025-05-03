@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <classes>
+        <class name="BTS">
+            <attributes>
+                <attribute name="id" type="uint32"/>
+                <attribute name="name" type="string"/>
+            </attributes>
+        </class>
+        <class name="HWE">
+            <attributes>
+                <attribute name="hwRevision" type="string"/>
+                <attribute name="id" type="uint32"/>
+                <attribute name="ip4Address" type="string"/>
+                <attribute name="manufacturerName" type="string"/>
+            </attributes>
+        </class>
+        <class name="COMM">
+            <attributes/>
+        </class>
+        <class name="RU">
+            <attributes/>
+        </class>
+        <class name="MGMT">
+            <attributes/>
+        </class>
+        <class name="METRICJOB">
+            <attributes>
+                <attribute name="isFinished" type="boolean"/>
+                <attribute name="jobId" type="uint32"/>
+            </attributes>
+        </class>
+        <class name="OFLANE">
+            <attributes/>
+        </class>
+    </classes>
+    <aggregations>
+        <aggregation source="BTS" target="COMM" min="1" max="1"/>
+        <aggregation source="COMM" target="HWE" min="0.42" max="1"/>
+        <aggregation source="COMM" target="RU" min="0.1" max="1"/>
+        <aggregation source="COMM" target="MGMT" min="1" max="1"/>
+        <aggregation source="MGMT" target="METRICJOB" min="0.1" max="100"/>
+        <aggregation source="RU" target="OFLANE" min="1" max="1"/>
+    </aggregations>
+</config>
